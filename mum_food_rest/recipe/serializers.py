@@ -1,5 +1,21 @@
 from rest_framework import serializers
 from recipe.models import Recipe
+from django.contrib.auth.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    recipe = serializers.PrimaryKeyRelatedField(many=True, queryset=Recipe.objects.all())
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'recipe']
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Recipe
+        fields = ['id', 'owner', 'title', 'description', 'vegan', 'vegetarian', 'likes', 'ingredients']
 
 #
 # class RecipeSerializer(serializers.Serializer):
@@ -29,8 +45,3 @@ from recipe.models import Recipe
 #         instance.ingredients = validated_data.get('ingredients', instance.ingredients)
 #         instance.save()
 #         return instance
-
-class RecipeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recipe
-        fields = ['id', 'title', 'description', 'vegan', 'vegetarian', 'likes','ingredients']

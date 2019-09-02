@@ -28,11 +28,11 @@ We want to expose recipes data in the back-end to display the data in an possibl
 A registered user is just a user with an account in the system that has a token to make authenticated requests.
 
 1. As an anonymous user I want to see a list of recipes, ordered by popularity (amount of likes).
-1. As an anonymous user I want to be able to see if a recipe is good for vegans. Is understood that a recipe is good for vegans if all the ingrements are compatible for vegan people.
+1. As an anonymous user I want to be able to see if a recipe is good for vegans. Is understood that a recipe is good for vegans if all the ingredients are compatible for vegan people.
 1. As an anonymous user I want to be able to filter the recipes by ingredients and if they are vegan or not.
 1. As an anonymous user I want to be able to like a recipe.
 1. As an anonymous user I can check a recipe to see the ingredients for it.
-1. As a registered user I want to be able to create a ingrement.
+1. As a registered user I want to be able to create a ingredient.
 1. As a registered user I want to be able to create a recipe.
 
 ## Next steps

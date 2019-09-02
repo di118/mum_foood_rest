@@ -3,6 +3,7 @@ from ingredient.models import Ingredient
 
 
 class Recipe(models.Model):
+    owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
     description = models.CharField(max_length=1000, blank=True, default='')
