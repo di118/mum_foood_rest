@@ -11,6 +11,7 @@ from recipe import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'recipe', views.RecipeViewSet)
+router.register(r'ingredient', views.IngredientViewSet)
 router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.

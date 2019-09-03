@@ -1,31 +1,36 @@
-from django.shortcuts import render
+# from django.shortcuts import render
+# from rest_framework.parsers import JSONParser
+# from rest_framework import status
+# from rest_framework.decorators import api_view
+# from django.http import Http404
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import status
+# from rest_framework import mixins
+# from rest_framework import generics
+# from rest_framework.decorators import action
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from mum_food_rest.serializers import UserSerializer, GroupSerializer
-from rest_framework.parsers import JSONParser
-from recipe.models import Recipe
-from rest_framework import status
-from rest_framework.decorators import api_view
-from recipe.serializers import RecipeSerializer
-from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import mixins
-from rest_framework import generics
+from recipe.models import Recipe, Ingredient
+from recipe.serializers import RecipeSerializer, IngredientSerializer
 from django.contrib.auth.models import User
 from recipe.serializers import UserSerializer
 from rest_framework import permissions
 from recipe.permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets
-from rest_framework.decorators import action
+
+from filters.mixins import (
+    FiltersMixin,
+)
+from .validations import recipe_query_schema
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class RecipeViewSet(viewsets.ModelViewSet):
+class RecipeViewSet(FiltersMixin, viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
@@ -36,10 +41,50 @@ class RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = RecipeSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
-
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('id', 'title','likes')
+    ordering = ('id',)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+        # add a mapping of query_params to db_columns(queries)
+
+    filter_mappings = {
+        'id': 'id',
+        'created': 'created',
+        'title': 'title',
+        'description': 'description',
+        'vegan': 'vegan',
+        'vegetarian': 'vegetarian',
+        'likes': 'likes',
+        'ingredients': 'ingredients',
+    }
+
+    # add validation on filters
+    filter_validation_schema = recipe_query_schema
+
+
+class IngredientViewSet(FiltersMixin, viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+
+
+    """
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,]
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('name')
+    ordering = ('name',)
+
+
+    filter_mappings = {
+        'id': 'id',
+        'name': 'name',
+
+    }
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
