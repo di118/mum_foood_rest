@@ -1,0 +1,11 @@
+version: '3'
+
+
+services:
+  web:
+    build: .
+    command: python mum_food_rest/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/mum_food_rest
+    ports:
+      - "8000:8000"
