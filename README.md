@@ -42,17 +42,22 @@ Build a Docker image that we can pull and run easily to check the API.
 When building the image, please make sure to include inside the .sqlite3 database that you have been using. With some data and a user with a token so we can see and create some data when running the image.
 Next, upload it to Docker Hub, making sure that the source repository points to the git repository so we can check out also the code. Write down the token in the description along with indication of how to use it to make an authenticated request.****
 
-## Commands
+## Postman request docs 
+
+[https://documenter.getpostman.com/view/6160615/SVfUq65j?version=latest](https://documenter.getpostman.com/view/6160615/SVfUq65j?version=latest) 
+
+## usefull commands
+```python
 docker pull di118/mum_rest_food_web
 docker-compose build
 docker-compose up
 docker-compose run web python mum_food_rest/manage.py runserver
-
+```
 
 
 Don't forget to create a username and password using 
-
+```python
 python manage.py createsuperuser --username=example --email=email@example.com 
-
+```
 ... then choose and confirm your password
 
