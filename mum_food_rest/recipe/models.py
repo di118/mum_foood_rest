@@ -1,5 +1,11 @@
 from django.db import models
-from ingredient.models import Ingredient
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Recipe(models.Model):
@@ -10,6 +16,6 @@ class Recipe(models.Model):
     vegan = models.BooleanField(default=False)
     vegetarian = models.BooleanField(default=False)
     likes = models.IntegerField()
-    ingredients = models.ForeignKey(Ingredient, null=True, on_delete=models.DO_NOTHING)
+    ingredients = models.ManyToManyField(Ingredient)
     class Meta:
         ordering = ['created']
