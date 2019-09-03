@@ -1,10 +1,4 @@
 ****# mum_foood_rest
- 
-![Logo](https://www.logolynx.com/images/logolynx/f8/f8ae7fb438b097af3292f88f44e922fc.png)
-# Code Test Exercise
-
-We value your time, so please only take an hour or two on this exercise. Do as much as you can, show us what you can do. 
-It is supposed to be challenging and give us things to talk about in the next interview. Just try your best!
 
 ## Goal
 
@@ -16,7 +10,7 @@ The goal of this exercise is to expose recipes data with an API using Django Res
 ## Guidelines
 
 * You don't need to reinvent the wheel.
-* Let us now how you did and what you found challenging or interesting in a THOUGHTS.md file.
+
 
 
 ## The task
