@@ -3,7 +3,7 @@ chardet==3.0.4
 colorama==0.4.1
 Django==2.2.5
 django-filter==1.1.0
-djangorestframework==3.10.2
+djangorestframework==3.11.2
 djangorestframework-filters==0.11.1
 drf-url-filters==0.5.1
 httpie==1.0.3
